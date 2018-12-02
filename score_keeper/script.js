@@ -10,8 +10,13 @@ var gameOver = false;
 var winnerScore = -1;
 
 input.addEventListener("change", function () {
-  displayTotal.textContent = " " + this.value;
-  winnerScore = Math.ceil(this.value / 2);
+  if (this.value !== "" && this.value > 0) {
+    displayTotal.textContent = " " + this.value;
+    winnerScore = Math.ceil(this.value / 2);
+  } else {
+    displayTotal.textContent = "__";
+    winnerScore = -1;
+  }
   reset();
 });
 
