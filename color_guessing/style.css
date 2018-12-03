@@ -9,6 +9,7 @@ h1 {
     transition: background 600ms;
 }
 
+/* Navbar */
 #bar {
     background: white;
 }
@@ -16,28 +17,43 @@ h1 {
 .bar-item {
     background: white;
     text-decoration: none;
-    transition: background 400ms;
+    transition: all 300ms;
 }
-.bar-item:hover, .bar-item:active {
+
+.bar-item:hover,
+.bar-item:active {
     text-decoration: none;
     cursor: pointer;
 }
+
 .btn {
     vertical-align: baseline;
     border-radius: 0;
 }
-#themeColor {
-    position: relative;
-    bottom: 3px;
-}
+
 button:focus {
     outline: none !important;
     box-shadow: none !important;
 }
 
+.dropdown-menu>.dropdown-item:hover {
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+    pointer-events: none;
+}
+
+/* Contents */
 .board {
     width: 60%;
 }
+
 .square {
     padding-bottom: 25%;
     border-radius: 15%;
@@ -50,6 +66,7 @@ button:focus {
     letter-spacing: 0.07em;
 }
 
+/* Extra small screen */
 @media (max-width: 768px) {
     h1 {
         font-size: 11vw;
