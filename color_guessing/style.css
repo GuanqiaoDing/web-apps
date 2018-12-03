@@ -1,0 +1,57 @@
+body {
+    background: #141414;
+}
+
+h1 {
+    font-family: 'Ranga', cursive;
+    font-size: 3.5rem;
+    letter-spacing: 0.07em;
+    transition: background 600ms;
+}
+
+#bar {
+    background: white;
+}
+
+.bar-item {
+    background: white;
+    text-decoration: none;
+    transition: background 400ms;
+}
+.bar-item:hover, .bar-item:active {
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn {
+    vertical-align: baseline;
+    border-radius: 0;
+}
+#themeColor {
+    position: relative;
+    bottom: 3px;
+}
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.board {
+    width: 60%;
+}
+.square {
+    padding-bottom: 25%;
+    border-radius: 15%;
+    transition: all 600ms;
+}
+
+#message {
+    min-height: 45px;
+    font-size: 1.5rem;
+    letter-spacing: 0.07em;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 11vw;
+    }
+}
