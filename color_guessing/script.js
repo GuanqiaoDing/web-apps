@@ -1,12 +1,3 @@
-var header = document.querySelector("h1");
-var barItems = document.querySelectorAll(".bar-item");
-var barDropDowns = document.querySelectorAll("#bar .dropdown-item");
-var squares = document.querySelectorAll(".square");
-var message = document.querySelector("#message");
-var colorDisplay = document.querySelector("#colorDisplay");
-var btnReset = document.querySelector("#reset");
-var inputTheme = document.querySelector("#themeColor");
-
 var colors = [];
 var themeColor = "#0EB3AC";
 var colorTarget;
@@ -18,89 +9,45 @@ var difficulties = {
   Hard: 9
 };
 
-window.addEventListener("load", function () {
-  updateTheme(themeColor);
-  initColors(curDifficulty);
+var defaultStyle = {
+  color: themeColor,
+  background: "#ffffff"
+};
+
+var highlightStyle = {
+  color: "#ffffff",
+  background: themeColor
+};
+
+$(document).ready(function () {
+  updateTheme();
+  initColors();
   setUpSquares();
+  setUpMenu();
 });
 
-btnReset.addEventListener("click", function () {
-  initColors(curDifficulty);
-  setUpSquares();
-  message.textContent = "";
-});
-
-inputTheme.addEventListener("change", function () {
-  themeColor = this.value;
-  updateTheme(themeColor);
-});
-
-barItems.forEach(function (item) {
-  if (window.innerWidth < 767) {
-    item.addEventListener("click", function () {
-      this.style.color = "#ffffff";
-      this.style.backgroundColor = themeColor;
-
-      setTimeout(function () {
-        item.style.color = themeColor;
-        item.style.backgroundColor = "#ffffff";
-      }, 200);
-    });
-  } else {
-    item.addEventListener("mouseover", function () {
-      this.style.color = "#ffffff";
-      this.style.backgroundColor = themeColor;
-    });
-
-    item.addEventListener("mouseout", function () {
-      if (this.textContent !== curDifficulty) {
-        this.style.color = themeColor;
-        this.style.backgroundColor = "#ffffff";
-      }
-    });
-  }
-});
-
-barDropDowns.forEach(function (item) {
-  item.addEventListener("mouseover", function () {
-    this.style.color = "#ffffff";
-    this.style.backgroundColor = themeColor;
-  });
-
-  item.addEventListener("mouseout", function () {
-    if (this.textContent !== curDifficulty) {
-      this.style.color = themeColor;
-      this.style.backgroundColor = "#ffffff";
+function updateTheme () {
+  $("h1").css(highlightStyle);
+  $(".bar-item").css(defaultStyle);
+  $(".dropdown-item").each(function () {
+    if ($(this).text() === curDifficulty) {
+      $(this).css(highlightStyle);
+    } else {
+      $(this).css(defaultStyle);
     }
   });
-
-  item.addEventListener("click", function () {
-    if (curDifficulty !== this.textContent) {
-      curDifficulty = this.textContent;
-      initColors(curDifficulty);
-      setUpSquares();
-
-      for (var i = 0; i < squares.length; i++) {
-        if (!colors[i]) {
-          squares[i].style.display = "none";
-        } else {
-          squares[i].style.display = "block";
-        }
-      }
-      message.textContent = "";
-      updateTheme(themeColor);
-    }
-  });
-});
-
-function initColors(level) {
-  var num = difficulties[level];
-  colors = generateColors(num);
-  colorTarget = pickColor(num);
-  colorDisplay.textContent = colorTarget.rgb().toUpperCase();
+  $("#themeColor").val(themeColor);
+  $("#message").css("color", themeColor);
 }
 
-function generateColors(num) {
+function initColors () {
+  var num = difficulties[curDifficulty];
+  colors = generateColors(num);
+  colorTarget = pickColor(num);
+  $("#colorDisplay").text(colorTarget.rgb().toUpperCase());
+}
+
+function generateColors (num) {
   var arr = [];
   for (let i = 0; i < num; i++) {
     arr.push(new Color());
@@ -108,7 +55,7 @@ function generateColors(num) {
   return arr;
 }
 
-function Color() {
+function Color () {
   this.r = Math.floor(Math.random() * 256);
   this.g = Math.floor(Math.random() * 256);
   this.b = Math.floor(Math.random() * 256);
@@ -127,49 +74,85 @@ function Color() {
   };
 }
 
-function pickColor(num) {
+function pickColor (num) {
   return colors[Math.floor(Math.random() * num)];
 }
 
-function setUpSquares() {
-  for (var i = 0; i < colors.length; i++) {
-    squares[i].style.backgroundColor = colors[i].rgb();
-    squares[i].addEventListener("click", function () {
-      var clickedColor = this.style.backgroundColor;
-      if (clickedColor === colorTarget.rgb()) {
-        message.textContent = "Correct!";
-        changeColors(colorTarget);
-      } else {
-        message.textContent = "Try again!";
-        this.style.backgroundColor = "#141414";
-      }
-    });
-  }
-}
-
-function changeColors(colorObj) {
-  themeColor = colorObj.rgb();
-  updateTheme(colorObj.rgb());
-  inputTheme.value = colorObj.hex();
-  var num = difficulties[curDifficulty];
-  for (var i = 0; i < num; i++) {
-    squares[i].style.backgroundColor = colorObj.rgb();
-  }
-}
-
-function updateTheme(color) {
-  header.style.backgroundColor = color;
-  barItems.forEach(function (item) {
-    item.style.color = color;
-  });
-  barDropDowns.forEach(function (item) {
-    if (item.textContent === curDifficulty) {
-      item.style.color = "#ffffff";
-      item.style.backgroundColor = color;
-    } else {
-      item.style.color = color;
-      item.style.backgroundColor = "#ffffff";
+function setUpSquares () {
+  $(".square").each(function (index) {
+    if (index < colors.length) {
+      $(this).css("background", colors[index].rgb());
+      $(this).on("click", function () {
+        if ($(this).css("background-color") === colorTarget.rgb()) {
+          $("#message").text("Correct!");
+          changeColors();
+        } else {
+          $("#message").text("Try Again!");
+          $(this).css("background", "#141414");
+        }
+      });
     }
   });
-  message.style.color = color;
+}
+
+function changeColors () {
+  themeColor = colorTarget.hex();
+  defaultStyle.color = themeColor;
+  highlightStyle.background = themeColor;
+  updateTheme();
+  $("#themeColor").val(themeColor);
+  $(".square").each(function (index) {
+    if (index < colors.length) {
+      $(this).css("background", colorTarget.rgb());
+    }
+  });
+}
+
+function setUpMenu () {
+  $("#reset").on("click", function () {
+    initColors();
+    setUpSquares();
+    $("#message").text("");
+  });
+
+  $("#themeColor").on("change", function () {
+    themeColor = $(this).val();
+    defaultStyle.color = themeColor;
+    highlightStyle.background = themeColor;
+    updateTheme();
+  });
+
+  $(".bar-item").each(function () {
+    $(this).on("mouseover", function () {
+      $(this).css(highlightStyle);
+    });
+    $(this).on("mouseout", function () {
+      if ($(this).text() !== curDifficulty) {
+        $(this).css(defaultStyle);
+      }
+    });
+  });
+
+  $(".dropdown-item").each(function () {
+    $(this).on("click", function () {
+      if ($(this).text() !== curDifficulty) {
+        curDifficulty = $(this).text();
+        changeDifficulty();
+      }
+    });
+  });
+}
+
+function changeDifficulty () {
+  initColors();
+  setUpSquares();
+  $(".square").each(function (index) {
+    if (index < colors.length){
+      $(this).fadeIn(600);
+    } else {
+      $(this).fadeOut(600);
+    }
+  });
+  $("#message").text("");
+  updateTheme();
 }

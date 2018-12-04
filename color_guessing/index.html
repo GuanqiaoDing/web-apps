@@ -10,6 +10,13 @@
     crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Ranga:400,700" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+          crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+          crossorigin="anonymous"></script>
+  <script type="text/javascript" src="script.js"></script>
   <title>Color Guessing Game</title>
 </head>
 
@@ -26,13 +33,13 @@
           Difficulty
         </button>
         <div class="dropdown-menu rounded-0 p-0 m-0">
-          <button class="dropdown-item" type="button">Easy</button>
-          <button class="dropdown-item" type="button">Medium</button>
-          <button class="dropdown-item" type="button">Hard</button>
+          <button class="bar-item dropdown-item" type="button">Easy</button>
+          <button class="bar-item dropdown-item" type="button">Medium</button>
+          <button class="bar-item dropdown-item" type="button">Hard</button>
         </div>
       </div>
       <label class="bar-item mb-0 px-1">
-        Theme <input id="themeColor" type="color" value="#0EB3AC" class="d-none d-sm-inline">
+        Theme <input id="themeColor" type="color" class="d-none d-sm-inline">
       </label>
       <a href="https://github.com/GuanqiaoDing/web-dev-bootcamp/tree/master/color_guessing" target="_blank" class="bar-item px-1">
         Repository <i class="fab fa-github d-none d-sm-inline"></i>
@@ -61,14 +68,6 @@
       </div>
     </div>
   </section>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-  <script type="text/javascript" src="script.js"></script>
 </body>
 
 </html>
