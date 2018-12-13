@@ -1,0 +1,19 @@
+{
+  "name": "firstapp",
+  "version": "1.0.0",
+  "description": "My first app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "Guanqiao Ding",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "pug-cli": "^1.0.0-alpha6"
+  }
+}
