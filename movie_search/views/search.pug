@@ -1,0 +1,74 @@
+extends layout
+
+mixin movie(movieData)
+    div.col-sm-6.col-lg-3.mb-3
+        div.card.bg-light
+            if movieData.Poster !== "N/A"
+                img.card-img-top(src=`${movieData.Poster}` alt="Movie poster")
+            else
+                img.card-img-top(src="https://dummyimage.com/240x400/6c757d/ffffff.png&text=Movie+Poster+Not+Available" alt="Movie poster not available")
+
+            div.card-body.p-0
+                p.card-title.my-1.pl-2= movieData.Title
+                p.card-text.float-left.mb-0.pl-2= movieData.Year
+                a#more.btn.btn-primary.btn-sm.float-right(href=`/movie?id=${movieData.imdbID}&page=${page}&key=${key}`) More
+                    i.fas.fa-chevron-circle-right.ml-1
+
+mixin page(num)
+    if num === page
+        li.page-item.active
+            a.page-link(href="#navbar")= num
+    else
+        li.page-item
+            a.page-link(href=`/search?page=${num}&key=${key}`)= num
+
+block content
+    include jumbotron
+
+    div.container
+        div#movies.row.align-items-stretch
+            if data !== undefined
+                for item in data
+                        +movie(item)
+            else
+                p.display-4.text-center Movies not found!
+
+        div#pagination.row.justify-content-center.align-items-center
+            nav
+                ul.pagination.mb-0
+                    if page === 1
+                        li.page-item.disabled
+                            a.page-link(href="#navbar")
+                                i.fas.fa-angle-left
+                        +page(page)
+                        +page(page + 1)
+                        +page(page + 2)
+                        li.page-item
+                            a.page-link(href=`/search?page=${lastPage}&key=${key}`)
+                                i.fas.fa-angle-right
+
+                    else if page === lastPage
+                        li.page-item
+                            a.page-link(href=`/search?page=1&key=${key}`)
+                                i.fas.fa-angle-left
+                        +page(page - 2)
+                        +page(page - 1)
+                        +page(page)
+                        li.page-item.disabled
+                            a.page-link(href="#navbar")
+                                i.fas.fa-angle-right
+                    else
+                        li.page-item
+                            a.page-link(href=`/search?page=1&key=${key}`)
+                                i.fas.fa-angle-left
+                        +page(page - 1)
+                        +page(page)
+                        +page(page + 1)
+                        li.page-item
+                            a.page-link(href=`/search?page=${lastPage}&key=${key}`)
+                                i.fas.fa-angle-right
+
+            form.d-flex.align-items-center(action=`/search` method="GET")
+                label.float-left.mb-0.ml-3.mr-1 Go to:
+                input.form-control(type="text" name="page")
+                input(type="hidden" name="key" value=`${key}`)

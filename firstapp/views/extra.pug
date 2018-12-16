@@ -1,0 +1,49 @@
+extends layout
+
+mixin comment(commentData)
+    .comment
+        p.date= commentData.date
+        p.author= commentData.author
+        p.text= commentData.text
+
+block content
+    //- add id
+    h1#pageTitle= title
+
+    //- add class
+    p.bigParagraph.
+        multiline paragraph.
+        This is the new line.
+
+    //- add attribute
+    input(type="password" name="pwd" disabled)
+
+    //- add const
+    - const myClasses = ["class1", "class2", "class3"];
+    div(class=myClasses)
+        - const myAttribute = {src: "myPhoto.png", alt: "This is my photo."};
+        img&attributes(myAttribute)
+
+        //- loop
+        ul list
+            for item, index in ["a", "b", "c", "d"]
+                li= extra + " - " + item
+
+        ul scores
+            for value, key in {"web dev": 88, "software": 90}
+                p= key + " - " + value
+
+    //- control flow
+    - let user = {name: "Mike", login: false, lastLogin: 6}
+    if user.login
+        p
+            | Welcome back,
+            strong #{user.name}
+    else
+        a(href="/login") login.
+
+    //- use mixin
+    - const c1 = {author: "Leo", date: "2018-01-09", text: "Pug is awesome!"};
+    - const c2 = {author: "David", date: "2018-01-11", text: "Hello! I'm here!"};
+    +comment(c1)
+    +comment(c2)

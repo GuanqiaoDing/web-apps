@@ -1,0 +1,7 @@
+div.container
+    div.jumbotron
+        h1.text-center Search For Movies
+        form#searchForm.d-flex.flex-row.justify-content-center(action="/search" method="GET")
+            input.col-10.form-control.form-control-sm.border-0(type="text" name="key" placeholder="search movies by name")
+            button.btn.btn-primary.btn-sm.border-0(type="submit")
+                i.fas.fa-search

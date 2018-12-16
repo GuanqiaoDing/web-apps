@@ -1,0 +1,23 @@
+{
+  "name": "movie_search",
+  "version": "1.0.0",
+  "description": "Movie search app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "movie"
+  ],
+  "author": "Guanqiao Ding",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.4",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "pug-cli": "^1.0.0-alpha6"
+  }
+}

@@ -1,0 +1,77 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+
+.jumbotron>h1 {
+    font-size: 1.5rem;
+}
+
+input:focus, .btn:focus, a.page-link {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.card-body .card-title {
+    font-weight: 500;
+}
+
+.card-body .card-text {
+    font-size: 0.8em;
+}
+
+#more.btn {
+    border-radius: 5px 0 5px 0;
+    font-size: 0.6em;
+}
+
+#searchForm>.btn {
+    border-radius: 0 5px 5px 0;
+}
+
+#searchForm>.form-control {
+    border-radius: 5px 0 0 5px;
+}
+
+#pagination input {
+    width: 60px;
+}
+
+#movieTitle span {
+    font-size: 1.5rem;
+    color: #6c757d;
+}
+
+#rating {
+    font-size: 1.5rem;
+}
+
+#info {
+    font-size: 0.8em;
+}
+
+#detail img {
+    max-height: 406px;
+}
+
+hr {
+    border: 1px solid #007bff;
+}
+
+@media (min-width: 576px) {
+    .card>img.card-img-top {
+        max-height: 300px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .card>img.card-img-top {
+        max-height: 450px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .card>img.card-img-top {
+        max-height: 350px;
+    }
+}

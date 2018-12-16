@@ -1,0 +1,44 @@
+extends layout
+
+mixin item(key)
+    li#info.list-group-item.py-2.d-inline-block.text-truncate
+        strong.mr-2= key + ":"
+        span= movie[`${key}`]
+
+block content
+    include jumbotron
+
+    div.container
+        div.row.mb-2
+            div.col-4
+            div.col-8.d-flex.flex-row.justify-content-between.align-items-end
+                h2#movieTitle= movie.Title
+                    span.ml-2= `(${movie.Year})`
+                p#rating.text-danger.mb-2= `IMDb: ${movie.imdbRating}/10`
+
+        div#detail.row.mb-3
+            div.col-4
+                if movie.Poster === "N/A"
+                    img.img-thumbnail(src="https://dummyimage.com/240x400/6c757d/ffffff.png&text=Movie+Poster+Not+Available" alt="Movie poster not available")
+                else
+                    img.img-thumbnail(src=`${movie.Poster}` alt="Movie poster")
+            div.col-8
+                ul.list-group
+                    +item("Released")
+                    +item("Rated")
+                    +item("Runtime")
+                    +item("Genre")
+                    +item("Director")
+                    +item("Writer")
+                    +item("Actors")
+                    +item("Language")
+                    +item("Country")
+
+        div.row
+            div.col-12
+                div.card
+                    div.card-body
+                        h3.card-title Plot
+                        p.card-text= movie.Plot
+                        a.btn.btn-sm.btn-primary.mr-2(href=`http://imdb.com/title/${movie.imdbID}` target="_blank") View IMDB
+                        a.btn.btn-sm.btn-secondary(href=`/search?page=${page}&key=${key}`) Back to Search
