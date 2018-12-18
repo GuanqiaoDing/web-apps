@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    div.container.mt-5
+        div.jumbotron.py-3
+            h1#pageTitle.text-center Edit "#{blog.title}"
+            form(action=`/blogs/${blog._id}?_method=PUT` method="POST")
+                div.form-group
+                    label(for="inputTitle") Title
+                    input.form-control(type="text" id="inputTitle" name="blog[title]" value=`${blog.title}` required)
+                div.form-group
+                    label(for="imageURL") Image URL
+                    input.form-control(type="text" id="imageURL" name="blog[image]" value=`${blog.image}`)
+                div.form-group
+                    label(for="inputBody") Body
+                    textarea.form-control(id="inputBody" name="blog[body]" rows="5" required)= blog.body
+                button.ui.inverted.primary.tiny.button.mr-1(type="submit") Submit
+                a.ui.inverted.secondary.tiny.button(href="/blogs") Go Back
+        div#blogEnd

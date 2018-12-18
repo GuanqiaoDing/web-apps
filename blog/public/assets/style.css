@@ -1,0 +1,68 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.mainContent {
+    background-image:
+        url("https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    overflow: auto;
+}
+
+.tint {
+    z-index: 1;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    overflow: auto;
+}
+
+#welcomeContainer {
+    height: 85%;
+}
+
+#welcomeText {
+    width: 100%;
+}
+
+#blogTitle.card-title {
+    font-size: 1.5rem;
+    color: black;
+}
+
+#date {
+    font-size: 1.0rem;
+}
+
+.ui.inverted.button.pageButton {
+    padding: 10px;
+}
+
+h1.display-4 {
+    font-size: 3.0rem;
+}
+
+@media (max-width: 992px) {
+    h1.display-4 {
+        font-size: 2rem;
+    }
+}
+
+#blogEnd {
+    height: 150px;
+    width: 100%;
+}
+
+.btn:focus, .navbar-toggler:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+a.navbar-brand:hover, a.nav-link:hover {
+    color: #818181 !important;
+}

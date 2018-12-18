@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    div.container.mt-5
+        div.jumbotron.py-3
+            h1.display-4.float-left.mr-2= blog.title
+                span#date.d-inline-block.text-secondary.ml-2 Published #{blog.created}
+            img#blogImg.img-thumbnail.mb-3.d-block.mx-auto(src=`${blog.image}` alt="Blog image")
+            div.row
+                div.col-md-3
+                    div.d-flex.justify-content-center.my-2
+                        a.pageButton.ui.inverted.blue.tiny.button.mr-1(href=`/blogs/${blog._id}/edit`)
+                            i.fas.fa-edit
+                        form(action=`/blogs/${blog._id}?_method=DELETE` method="POST")
+                            button.pageButton.ui.inverted.red.tiny.button.mr-1(type="submit")
+                                i.fas.fa-trash-alt
+                        a.pageButton.ui.inverted.secondary.tiny.button(href="/blogs")
+                            i.fas.fa-arrow-circle-left
+                div.col-md-9
+                    p !{blog.body}
+        div#blogEnd

@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    div.container
+        div.text-white.text-center.py-3
+            h1#pageTitle All the Posts
+    div#blogContainer.container
+        for blog in blogs
+            div.card.mb-3
+                article#blog.row
+                    div.col-md-5.d-flex.align-items-center
+                        img.img-thumbnail(src=`${blog.image}`, alt="blog image")
+                    div.col-md-7.card-body
+                        a#blogTitle.card-title(href=`/blogs/${blog._id}`)= blog.title
+                        p.text-muted Published #{blog.created}
+                        p.card-text !{blog.body.substring(0, 200)} ...
+                        a.ui.inverted.blue.tiny.button(href=`/blogs/${blog._id}`) Read more
+        div#blogEnd
