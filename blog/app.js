@@ -4,7 +4,6 @@ require("./dbLogin.js");
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const sanitizer = require("express-sanitizer");
 const moment = require("moment");
 const methodOverride = require("method-override");
 const app = express();
@@ -14,7 +13,6 @@ const port = 3000;
 // app config
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(sanitizer());
 app.use(methodOverride("_method"));
 app.set("view engine", "pug");
 mongoose.connect(url, {useNewUrlParser: true, useFindAndModify: false})
@@ -60,7 +58,6 @@ app.get("/blogs/new", (req, res) => {
 });
 // CREATE route
 app.post("/blogs", (req, res) => {
-	req.body.blog.body = req.sanitize(req.body.blog.body);
 	Blog.create(req.body.blog)
 		.catch(err => console.log(err))
 		.then(() => {
@@ -85,7 +82,6 @@ app.get("/blogs/:id/edit", (req, res) => {
 });
 // UPDATE route
 app.put("/blogs/:id", (req, res) => {
-	req.body.blog.body = req.sanitize(req.body.blog.body);
 	Blog.findByIdAndUpdate(req.params.id, req.body.blog)
 		.catch(err => console.log(err))
 		.then(() => {

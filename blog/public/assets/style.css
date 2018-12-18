@@ -35,6 +35,10 @@ html, body {
     color: black;
 }
 
+.blogBody {
+    white-space: pre-line;
+}
+
 #date {
     font-size: 1.0rem;
 }

@@ -13,6 +13,6 @@ block content
                     div.col-md-7.card-body
                         a#blogTitle.card-title(href=`/blogs/${blog._id}`)= blog.title
                         p.text-muted Published #{blog.created}
-                        p.card-text !{blog.body.substring(0, 200)} ...
+                        p.blogBody.card-text #{blog.body.substring(0, 200)} ...
                         a.ui.inverted.blue.tiny.button(href=`/blogs/${blog._id}`) Read more
         div#blogEnd
