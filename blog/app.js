@@ -1,102 +1,55 @@
-// dbLogin.js has the username and password and is git ignored
-require("./dbLogin.js");
+// admin.js has the username and password and is git ignored
+const admin = require("./helper/admin");
 
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const moment = require("moment");
-const methodOverride = require("method-override");
-const app = express();
-const url = `mongodb+srv://${process.env["DB_username"]}:${process.env["DB_password"]}@cluster0-ia9vl.mongodb.net/blog_app?retryWrites=true`;
-const port = 3000;
+const express = require("express"),
+			mongoose = require("mongoose"),
+			bodyParser = require("body-parser"),
+			moment = require("moment"),
+			methodOverride = require("method-override"),
+			passport = require("passport"),
+			LocalStrategy = require("passport-local"),
+			User = require("./schema/user");
+
+const blogRoute = require("./routes/blogs"),
+			commentRoute = require("./routes/comments"),
+			indexRoute = require("./routes/index");
 
 // app config
+const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.set("view engine", "pug");
-mongoose.connect(url, {useNewUrlParser: true, useFindAndModify: false})
+
+// passport config
+app.use(require("express-session")({
+	secret: `${admin.secret}`,
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+app.use((req, res, next) => {
+	res.locals.currentUser = req.user;
+	next();
+});
+
+// add routes
+app.use("/", indexRoute);
+app.use("/blogs", blogRoute);
+app.use("/blogs/:id/comments",commentRoute);
+
+// MongoDB login
+const dbURL = `mongodb+srv://${admin.user}:${admin.password}@cluster0-ia9vl.mongodb.net/blog_app?retryWrites=true`;
+mongoose.connect(dbURL, {useNewUrlParser: true, useFindAndModify: false})
 	.catch(err => console.log(err))
-	.then();
+	.then(() => console.log("MongoDB connected!"));
 
-// mongoose config
-const blogSchema = new mongoose.Schema({
-	title: String,
-	image: {type: String, default: "https://pixabay.com/get/ea37b80821fd053ed1584d05fb1d4e97e07ee3d21cac104491f5c178aeeab6bf_340.jpg"},
-	body: String,
-	created: {type: String, default: moment().format("MMM Do, YYYY")}
-});
-const Blog = mongoose.model("blog", blogSchema);
-
-// Blog.create({
-// 	title: "Kitchen Design",
-// 	image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80",
-// 	body: "This is a contemporary style kitchen with a clean design."
-// }).catch(err => console.log(err))
-// 	.then(blog => console.log(blog));
-//
-// Blog.find({})
-// 	.then(blogs => console.log(blogs))
-// 	.catch(err => console.log(err));
-
-// RESTFUL routes
-// landing page
-app.get("/", (req, res) => {
-	res.render("index");
-});
-// INDEX route
-app.get("/blogs", (req, res) => {
-	Blog.find({})
-		.catch(err => console.log(err))
-		.then(blogs => {
-			res.render("blogs", {blogs: blogs});
-		})
-});
-// NEW route
-app.get("/blogs/new", (req, res) => {
-	res.render("new");
-});
-// CREATE route
-app.post("/blogs", (req, res) => {
-	Blog.create(req.body.blog)
-		.catch(err => console.log(err))
-		.then(() => {
-			res.redirect("/blogs");
-		});
-});
-// SHOW route
-app.get("/blogs/:id", (req, res) => {
-	Blog.findById(req.params.id)
-		.catch(err => console.log(err))
-		.then(foundBlog => {
-			res.render("show", {blog: foundBlog});
-		});
-});
-// EDIT route
-app.get("/blogs/:id/edit", (req, res) => {
-	Blog.findById(req.params.id)
-		.catch(err => console.log(err))
-		.then(foundBlog => {
-			res.render("edit", {blog: foundBlog});
-		});
-});
-// UPDATE route
-app.put("/blogs/:id", (req, res) => {
-	Blog.findByIdAndUpdate(req.params.id, req.body.blog)
-		.catch(err => console.log(err))
-		.then(() => {
-			res.redirect(`/blogs/${req.params.id}`);
-		});
-});
-// DELETE route
-app.delete("/blogs/:id", (req, res) => {
-	Blog.findByIdAndDelete(req.params.id)
-		.catch(err => console.log(err))
-		.then(() => {
-			res.redirect("/blogs");
-		});
-});
-
+// start local server
+const port = 3000;
 app.listen(port, () => {
-	console.log(`Blog has started at port ${port}!`);
+	console.log(`${moment().format("MMM Do, YYYY -- h:mm:ss a")}: Blog has started at port ${port}!`);
 });

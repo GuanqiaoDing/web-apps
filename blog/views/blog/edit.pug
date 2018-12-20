@@ -1,9 +1,10 @@
-extends layout
+extends ../components/layout
 
 block content
+    include ../components/navbar
     div.container.mt-5
         div.jumbotron.py-3
-            h1#pageTitle.text-center Edit "#{blog.title}"
+            h1.display-4.text-center Edit "#{blog.title}"
             form(action=`/blogs/${blog._id}?_method=PUT` method="POST")
                 div.form-group
                     label(for="inputTitle") Title
@@ -13,7 +14,7 @@ block content
                     input.form-control(type="text" id="imageURL" name="blog[image]" value=`${blog.image}`)
                 div.form-group
                     label(for="inputBody") Body
-                    textarea.form-control(id="inputBody" name="blog[body]" rows="5" required)= blog.body
+                    textarea.form-control(id="inputBody" name="blog[body]" rows="10" required)= blog.body
                 button.ui.inverted.primary.tiny.button.mr-1(type="submit") Submit
                 a.ui.inverted.secondary.tiny.button(href="/blogs") Go Back
-        div#blogEnd
+        div.placeholder

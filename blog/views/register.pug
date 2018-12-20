@@ -1,0 +1,33 @@
+extends components/layout
+
+block content
+    include components/navbar
+    div#registerContainer.container.mt-5
+        div.row
+            div.col-md-6.jumbotron.mx-auto.py-4
+                h1.text-center.mb-3 Sign Up
+                form(action="/register" method="POST")
+                    div.form-group
+                        label(for="inputUsername") Username
+                        div.input-group
+                            div.input-group-prepend
+                                span.input-group-text
+                                    i.fas.fa-user
+                            input.form-control(type="text" id="inputUsername" name="username" required)
+                    div.form-group
+                        label(for="inputEmail") Email
+                        div.input-group
+                            div.input-group-prepend
+                                span.input-group-text
+                                    i.fas.fa-at
+                            input.form-control(type="email" id="inputEmail" name="email" required)
+                    div.form-group
+                        label(for="inputPassword") Password
+                        div.input-group
+                            div.input-group-prepend
+                                span.input-group-text
+                                    i.fas.fa-lock
+                            input.form-control(type="password" id="inputPassword" name="password" required)
+                    button.ui.inverted.primary.tiny.button.mr-1(type="submit") Register
+                    a.ui.inverted.secondary.tiny.button(href="/") Back to Home
+        div.placeholder

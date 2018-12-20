@@ -22,8 +22,17 @@ html, body {
     overflow: auto;
 }
 
+div.placeholder {
+    height: 150px;
+    width: 100%;
+}
+
 #welcomeContainer {
     height: 85%;
+}
+
+#registerContainer {
+    height: 80%;
 }
 
 #welcomeText {
@@ -35,12 +44,24 @@ html, body {
     color: black;
 }
 
+#blogMeta {
+    font-size: 0.8rem;
+}
+
+#navList {
+    width: 100%;
+}
+
 .blogBody {
     white-space: pre-line;
 }
 
-#date {
-    font-size: 1.0rem;
+#author {
+    font-size: 0.4em;
+}
+
+span.commentDate {
+    font-size: 0.6em;
 }
 
 .ui.inverted.button.pageButton {
@@ -55,18 +76,20 @@ h1.display-4 {
     h1.display-4 {
         font-size: 2rem;
     }
+    h3.commentHeader {
+        font-size: 1.5rem;
+    }
+    h5.commentTitle {
+        font-size: 1.3rem;
+    }
 }
 
-#blogEnd {
-    height: 150px;
-    width: 100%;
-}
-
-.btn:focus, .navbar-toggler:focus {
+.btn:focus, .navbar-toggler:focus, input.form-control {
     outline: none !important;
     box-shadow: none !important;
 }
 
-a.navbar-brand:hover, a.nav-link:hover {
+a.navbar-brand:hover, a.nav-link:hover, a.dropdown-item:hover {
     color: #818181 !important;
+    background: none;
 }

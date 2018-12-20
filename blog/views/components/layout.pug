@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+        title MicroBlog
+
+        link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+            crossorigin="anonymous")
+        link(href="https://fonts.googleapis.com/css?family=Montserrat:300,500" rel="stylesheet")
+
+        link(rel="stylesheet" href="/lib/bootstrap.4.1.3.css")
+        link(rel="stylesheet" href="/lib/button.min.css")
+        link(rel="stylesheet" href="/assets/style.css")
+        script(type="text/javascript" src="/lib/jquery-3.3.1.js")
+        script(type="text/javascript" src="/lib/popper.1.14.3.js")
+        script(type="text/javascript" src="/lib/bootstrap.4.1.3.js")
+        block script
+    body
+        div.mainContent
+            div.tint
+                block content
+                footer#footerContainer.text-white.py-3
+                    p.text-center.my-0 Created by Guanqiao Ding

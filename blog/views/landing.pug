@@ -1,9 +1,11 @@
-extends layout
+extends components/layout
 
 block content
+    include components/navbar
     div#welcomeContainer.container.d-flex.flex-column.justify-content-center
         div#welcomeText.text-white
             h1.display-4.mb-3 Welcome to MicroBlog!
-            p.lead.mb-5 Find your way home with fascinating moments recorded.
+            p.lead.mb-2 Find your way home and start MicroBlogging whatever you want today!
+            hr.border-white
             a.ui.inverted.button(href="/blogs") View all posts
-        div#blogEnd
+        div.placeholder

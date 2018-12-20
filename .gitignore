@@ -4,4 +4,4 @@ misc
 firstapp
 movie_search/node_modules
 blog/node_modules
-blog/dbLogin.js
+blog/helper

@@ -1,0 +1,68 @@
+extends ../components/layout
+
+block script
+    script(type="text/javascript", src="/assets/editComment.js")
+
+block content
+    include ../components/navbar
+    div.container.mt-5
+        div.jumbotron.py-3
+            h1.display-4= blog.title
+                span#author.d-inline-block.text-secondary.ml-2
+                    em By #{blog.user.username}
+            hr.mt-2
+            img#blogImg.img-thumbnail.mb-3(onerror="this.src='https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80'" src=`${blog.image}` alt="Blog image")
+            div.row
+                div.col-md-3
+                    p.text-muted.mb-1 Published #{blog.created}
+                    div.my-2
+                        if currentUser && blog.user.id.equals(currentUser._id)
+                            a.pageButton.ui.inverted.orange.tiny.button.mr-1(href=`/blogs/${blog._id}/edit`)
+                                i.fas.fa-edit
+                            form.d-inline(action=`/blogs/${blog._id}?_method=DELETE` method="POST")
+                                button.pageButton.ui.inverted.red.tiny.button.mr-1(type="submit")
+                                    i.fas.fa-trash-alt
+                            a.pageButton.ui.inverted.secondary.tiny.button(href="/blogs")
+                                i.fas.fa-arrow-circle-left
+                        else
+                            a.pageButton.ui.inverted.secondary.tiny.button(href="/blogs")
+                                i.fas.fa-arrow-circle-left
+                                span.mb-0.ml-1 Go back
+                div.col-md-9
+                    p.blogBody= blog.body
+
+            div.jumbotron.pt-0
+                h3.commentHeader.mb-0 Add New Comment
+                hr.mt-2
+                if !currentUser
+                    div.jumbotron.mb-0.py-3.placeholder
+                        h5.text-center Sign in to add comment!
+                        p.mb-0.text-center
+                            a.ui.inverted.primary.tiny.button.text-center(href="/login") Sign In
+                else
+                    form.mb-5(action=`/blogs/${blog._id}/comments` method="POST")
+                        div.form-group
+                            textarea.form-control(name="comment[content]" rows="5" required)
+                        button.ui.inverted.primary.tiny.button(type="submit") Submit
+
+                h3.commentHeader.mb-0 All Comments
+                hr.mt-2
+                for comment in blog.comments.reverse()
+                    div.card.mb-2
+                        div.card-body
+                            if currentUser && comment.user.id.equals(currentUser._id)
+                                div.buttonContainer.float-right
+                                    a.editComment.pageButton.ui.inverted.orange.mini.button
+                                        i.fas.fa-edit
+                                    form.d-inline(action=`/blogs/${blog._id}/comments/${comment._id}?_method=DELETE` method="POST")
+                                        button.pageButton.ui.inverted.red.mini.button(type="submit")
+                                            i.fas.fa-trash-alt
+                            h5.commentTitle.card-title= comment.user.username
+                                span.commentDate.d-inline-block.text-muted.ml-2= comment.created
+                            p.blogBody.card-text= comment.content
+                            form.mb-3.d-none(action=`/blogs/${blog._id}/comments/${comment._id}?_method=PUT` method="POST")
+                                div.form-group
+                                    textarea.form-control(name="comment[content]" rows="5" required)= comment.content
+                                button.pageButton.ui.inverted.primary.mini.button(type="submit") Submit
+                                a.cancelEdit.pageButton.ui.inverted.secondary.mini.button Cancel
+        div.placeholder
