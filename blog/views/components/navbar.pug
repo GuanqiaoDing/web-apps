@@ -34,3 +34,9 @@ nav#navbar.navbar.navbar-expand-md.navbar-dark.mb-3.py-0
                                 a.dropdown-item.text-white(href="/logout")
                                     i.fas.fa-sign-out-alt.mr-1
                                     span.mb-0 Sign Out
+
+div.container
+    if error && error.length > 0
+        div.alert.alert-danger.py-2.px-3(role="alert")= error
+    else if success && success.length > 0
+        div.alert.alert-success.py-2.px-3(role="alert")= success

@@ -28,7 +28,7 @@ div.placeholder {
 }
 
 #welcomeContainer {
-    height: 85%;
+    height: 82%;
 }
 
 #registerContainer {
@@ -39,6 +39,10 @@ div.placeholder {
     width: 100%;
 }
 
+#navList {
+    width: 100%;
+}
+
 #blogTitle.card-title {
     font-size: 1.5rem;
     color: black;
@@ -46,10 +50,6 @@ div.placeholder {
 
 #blogMeta {
     font-size: 0.8rem;
-}
-
-#navList {
-    width: 100%;
 }
 
 .blogBody {

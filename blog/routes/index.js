@@ -25,11 +25,12 @@ router.post("/register", (req, res) => {
 	const newUser = new User({username: req.body.username, email: req.body.email});
 	User.register(newUser, req.body.password)
 		.catch(err => {
-			console.log(err);
-			res.render("register");
+			req.flash("error", err.message);
+			res.redirect("/register");
 		})
 		.then(user => {
 			passport.authenticate("local")(req, res, () => {
+				req.flash("success", `Welcome to MicroBlog, ${user.username}`);
 				res.redirect("/blogs");
 			});
 		});
@@ -43,14 +44,16 @@ router.get("/login", (req, res) => {
 	else res.render("login");
 });
 router.post("/login", passport.authenticate("local",
-	{failureRedirect: "/login"}),
+	{failureRedirect: "/login", failureFlash: true}),
 	(req, res) => {
+		req.flash("success", `Welcome back, ${req.user.username}`);
 		res.redirect("/blogs");
 	});
 
 //logout
 router.get("/logout", (req, res) => {
 	req.logout();
+	req.flash("success", "You have logged out.");
 	res.redirect("/blogs");
 });
 

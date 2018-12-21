@@ -5,6 +5,7 @@ const express = require("express"),
 			mongoose = require("mongoose"),
 			bodyParser = require("body-parser"),
 			moment = require("moment"),
+			flash = require("connect-flash");
 			methodOverride = require("method-override"),
 			passport = require("passport"),
 			LocalStrategy = require("passport-local"),
@@ -19,6 +20,7 @@ const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+app.use(flash());
 app.set("view engine", "pug");
 
 // passport config
@@ -34,6 +36,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
 	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
 	next();
 });
 
@@ -49,7 +53,6 @@ mongoose.connect(dbURL, {useNewUrlParser: true, useFindAndModify: false})
 	.then(() => console.log("MongoDB connected!"));
 
 // start local server
-const port = 3000;
-app.listen(port, () => {
-	console.log(`${moment().format("MMM Do, YYYY -- h:mm:ss a")}: Blog has started at port ${port}!`);
+app.listen(80,() => {
+	console.log(`${moment().format("MMM Do, YYYY -- h:mm:ss a")}: Blog has started at port 80!`);
 });
