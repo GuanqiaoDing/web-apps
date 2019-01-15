@@ -1,6 +1,6 @@
 const express = require("express");
 const axios = require("axios");
-const port = 3000;
+const port = process.env.PORT;
 const app = express();
 
 app.set("view engine", "pug");

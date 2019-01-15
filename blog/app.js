@@ -1,6 +1,3 @@
-// admin.js has the username and password and is git ignored
-const admin = require("./helper/admin");
-
 const express = require("express"),
 			mongoose = require("mongoose"),
 			bodyParser = require("body-parser"),
@@ -25,7 +22,7 @@ app.set("view engine", "pug");
 
 // passport config
 app.use(require("express-session")({
-	secret: `${admin.secret}`,
+	secret: `${process.env.passportJS_secret}`,
 	resave: false,
 	saveUninitialized: false
 }));
@@ -47,12 +44,12 @@ app.use("/blogs", blogRoute);
 app.use("/blogs/:id/comments",commentRoute);
 
 // MongoDB login
-const dbURL = `mongodb+srv://${admin.user}:${admin.password}@cluster0-ia9vl.mongodb.net/blog_app?retryWrites=true`;
-mongoose.connect(dbURL, {useNewUrlParser: true, useFindAndModify: false})
+mongoose.connect(process.env.MongoURL, {useNewUrlParser: true, useFindAndModify: false})
 	.catch(err => console.log(err))
 	.then(() => console.log("MongoDB connected!"));
 
 // start local server
-app.listen(3000, () => {
-	console.log(`${moment().format("MMM Do, YYYY -- h:mm:ss a")}: Blog has started at port 3000!`);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+	console.log(`${moment().format("MMM Do, YYYY -- h:mm:ss a")}: MicroBlog has started at port ${port}!`);
 });
