@@ -1,0 +1,5 @@
+blog/public/lib/* linguist-vendored
+color_guessing/lib/* linguist-vendored
+movie_search/public/lib/* linguist-vendored
+*.js linguist-language=JavaScript
+*.pug linguist-language=JavaScript

@@ -53,6 +53,6 @@ mongoose.connect(dbURL, {useNewUrlParser: true, useFindAndModify: false})
 	.then(() => console.log("MongoDB connected!"));
 
 // start local server
-app.listen(80,() => {
-	console.log(`${moment().format("MMM Do, YYYY -- h:mm:ss a")}: Blog has started at port 80!`);
+app.listen(3000, () => {
+	console.log(`${moment().format("MMM Do, YYYY -- h:mm:ss a")}: Blog has started at port 3000!`);
 });
