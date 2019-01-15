@@ -1,4 +1,4 @@
-# web-dev-bootcamp
+# web-apps
 Build web applications with Javascript, jQuery, Node.js, Express.js and MongoDB, etc..
 
 Front-end:
@@ -11,7 +11,7 @@ Full-stack (MEN stack):
     - Front-end: HTML, CSS, Bootstrap
     - Work with API
 
-- [MicroBlog App](https://guanqiao-ding-microblog.herokuapp.com/) (Most comprehensive app)
+- [MicroBlog App](https://guanqiao-ding-microblog.herokuapp.com/)
     - Back-end: Node.js, Express.js, MongoDB Atlas, passport.js, Pug template engine
     - Front end: HTML, CSS, Bootstrap, Semantic UI
     - RESTFUL routing, Data models, user authentication, flash messages, write middlewares, UI improvement
