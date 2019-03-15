@@ -2,8 +2,8 @@
 Build web applications with Javascript, jQuery, Node.js, Express.js and MongoDB, etc..
 
 Front-end:
-- [Score Keeper App](https://guanqiaoding.github.io/web-dev-bootcamp/score_keeper) -- Javascript
-- [Color Guessing Game](https://guanqiaoding.github.io/web-dev-bootcamp/color_guessing) -- jQuery, Bootstrap
+- [Score Keeper App]( https://guanqiaoding.github.io/web-apps/score_keeper) -- Javascript
+- [Color Guessing Game]( https://guanqiaoding.github.io/web-apps/color_guessing) -- jQuery, Bootstrap
 
 Full-stack (MEN stack):
 - [Movie Search App](https://guanqiao-ding-movie.herokuapp.com/) 
